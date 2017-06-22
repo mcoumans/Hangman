@@ -10,16 +10,20 @@ secret_word = "boeken"
 secret_word_l = list(secret_word)
 turn = 1
 error = 0
-guessed_letters = []
+guessed_letters = [""]
 guessed_word = ["_"] * len(secret_word)
 board.append(guessed_word)
 
 
 def print_board(board):
- #   print("\n"*30)
+    #   print("\n"*30)
     for row in board:
         print(" ".join(row))
-
+    print("")
+    guessed_letters.sort()
+    guessed = "".join(guessed_letters)
+    print("Guessed: {}".format(guessed))
+    print("")
 
 def hang_it(x):
     if x == 1:
@@ -39,10 +43,12 @@ def hang_it(x):
     if x == 8:
         board[5] = [" ", "|", " ", "/", " ", "\\", " "]
 
+
 def game_over():
     print_board(board)
     print("Game over!")
     exit()
+
 
 def inputting():
     global turn
@@ -55,11 +61,12 @@ def inputting():
             print("Try again")
             if turn > 26: game_over()
             return False
-            #inputting()
+            # inputting()
         else:
             guessed_letters.append(guess)
         return guess
-    else: return False
+    else:
+        return False
 
 
 # find indeces for guessed letter in secret word
@@ -85,6 +92,3 @@ while True:
     if guessed_word == secret_word_l:
         print("You win!")
         exit()
-
-
-
